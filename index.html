@@ -10,7 +10,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;
+        }
+        
+        /* Only apply custom cursor on desktop */
+        @media (min-width: 769px) {
+            * {
+                cursor: none;
+            }
         }
 
         :root {
@@ -31,28 +37,38 @@
             position: relative;
         }
 
-        /* Custom Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            mix-blend-mode: difference;
-        }
+        /* Custom Cursor - Only show on desktop */
+        @media (min-width: 769px) {
+            .cursor {
+                width: 20px;
+                height: 20px;
+                border: 2px solid var(--primary);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.1s ease;
+                mix-blend-mode: difference;
+            }
 
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 255, 136, 0.1);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.3s ease;
+            .cursor-follower {
+                width: 40px;
+                height: 40px;
+                background: rgba(0, 255, 136, 0.1);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9998;
+                transition: transform 0.3s ease;
+            }
+        }
+        
+        /* Hide cursor elements on mobile */
+        @media (max-width: 768px) {
+            .cursor,
+            .cursor-follower {
+                display: none !important;
+            }
         }
 
         /* Animated Background */
@@ -264,16 +280,13 @@
 
         .glitch {
             position: relative;
-            color: var(--text);
+            color: #ffffff;
             font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 900;
             text-transform: uppercase;
-            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                        -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                        0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             animation: glitch 1s infinite;
             letter-spacing: -2px;
-            cursor: none;
             z-index: 1;
             pointer-events: none;
             user-select: none;
@@ -284,49 +297,31 @@
 
         @keyframes glitch {
             0%, 100% {
-                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             }
             20% {
-                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             }
             21% {
-                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
             }
             40% {
-                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
             }
             41% {
-                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                            0.05em 0 0 rgba(0, 255, 0, 0.75),
-                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
             }
             60% {
-                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                            0.05em 0 0 rgba(0, 255, 0, 0.75),
-                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
             }
             61% {
-                text-shadow: -0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
             }
             80% {
-                text-shadow: -0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
             }
             81% {
-                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             }
         }
 
@@ -374,7 +369,6 @@
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             border-radius: 100px;
-            cursor: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -1132,34 +1126,48 @@
             /* Hero Section */
             .hero {
                 padding: 0 20px;
-                min-height: 90vh;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             .hero-content {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 20px;
                 text-align: center;
+                width: 100%;
+                max-width: 100%;
             }
             
             .hero-text h1 {
                 font-size: clamp(2.5rem, 8vw, 4rem);
-                margin-bottom: 15px;
+                margin-bottom: 10px;
+            }
+            
+            .glitch {
+                color: #ffffff !important;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
+                animation: none !important;
+                filter: none;
             }
             
             .hero-text .subtitle {
                 font-size: 1.2rem;
-                margin-bottom: 15px;
+                margin-bottom: 10px;
             }
             
             .hero-text p {
                 font-size: 1rem;
-                margin-bottom: 25px;
+                margin-bottom: 20px;
+                line-height: 1.6;
             }
             
             .cta-buttons {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
                 align-items: center;
+                margin-bottom: 20px;
             }
             
             .btn {
@@ -1170,7 +1178,7 @@
             
             .terminal {
                 padding: 20px;
-                margin-top: 20px;
+                margin-top: 10px;
             }
             
             .terminal-body {
@@ -1313,16 +1321,33 @@
 
         @media (max-width: 480px) {
             /* Extra small screens */
+            .hero {
+                min-height: 100vh;
+                padding: 20px;
+            }
+            
             .hero-text h1 {
                 font-size: clamp(2rem, 10vw, 3rem);
+                margin-bottom: 8px;
+            }
+            
+            .glitch {
+                color: #ffffff !important;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+                animation: none !important;
+                filter: none;
+                font-weight: 800 !important;
             }
             
             .hero-text .subtitle {
                 font-size: 1rem;
+                margin-bottom: 8px;
             }
             
             .hero-text p {
                 font-size: 0.9rem;
+                margin-bottom: 15px;
+                line-height: 1.5;
             }
             
             .btn {
@@ -1333,6 +1358,7 @@
             
             .terminal {
                 padding: 15px;
+                margin-top: 5px;
             }
             
             .terminal-body {
@@ -1404,6 +1430,7 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1 class="glitch" data-text="Kshitij Gupta">Kshitij Gupta</h1>
+                <h1 class="name-fallback" style="display: none; color: #ffffff; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); margin-bottom: 15px;">Kshitij Gupta</h1>
                 <p class="subtitle">AI/ML Engineer & Full-Stack Developer</p>
                 <p>Passionate Computer Science student specializing in AI & Machine Learning at PES University. Building intelligent solutions that bridge the gap between complex algorithms and real-world applications.</p>
                 <div class="cta-buttons">
@@ -1579,32 +1606,36 @@
     </footer>
 
     <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
+        // Custom Cursor - Only initialize on desktop
+        if (window.innerWidth > 768) {
+            const cursor = document.querySelector('.cursor');
+            const follower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                follower.style.left = e.clientX - 10 + 'px';
-                follower.style.top = e.clientY - 10 + 'px';
-            }, 100);
-        });
+            if (cursor && follower) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    
+                    setTimeout(() => {
+                        follower.style.left = e.clientX - 10 + 'px';
+                        follower.style.top = e.clientY - 10 + 'px';
+                    }, 100);
+                });
 
-        // Hover Effect on Interactive Elements
-        const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-item');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(2)';
-                follower.style.transform = 'scale(1.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                follower.style.transform = 'scale(1)';
-            });
-        });
+                // Hover Effect on Interactive Elements
+                const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-item');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.style.transform = 'scale(2)';
+                        follower.style.transform = 'scale(1.5)';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.style.transform = 'scale(1)';
+                        follower.style.transform = 'scale(1)';
+                    });
+                });
+            }
+        }
 
         // Particle Animation
         const particlesContainer = document.getElementById('particles');
@@ -1716,13 +1747,37 @@
             }
         });
 
-        // Disable custom cursor on mobile devices
-        if (window.innerWidth <= 768) {
-            document.body.style.cursor = 'auto';
-            document.querySelectorAll('*').forEach(el => {
-                el.style.cursor = 'auto';
-            });
+        // Function to handle mobile display
+        function handleMobileDisplay() {
+            const glitchElement = document.querySelector('.glitch');
+            const fallbackElement = document.querySelector('.name-fallback');
+            
+            if (window.innerWidth <= 768) {
+                // Ensure normal cursor behavior on mobile
+                document.body.style.cursor = 'auto';
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.cursor = 'auto';
+                });
+                
+                // Show fallback name on mobile for better visibility
+                if (glitchElement && fallbackElement) {
+                    glitchElement.style.display = 'none';
+                    fallbackElement.style.display = 'block';
+                }
+            } else {
+                // Show glitch effect on desktop
+                if (glitchElement && fallbackElement) {
+                    glitchElement.style.display = 'block';
+                    fallbackElement.style.display = 'none';
+                }
+            }
         }
+        
+        // Initial call
+        handleMobileDisplay();
+        
+        // Handle window resize
+        window.addEventListener('resize', handleMobileDisplay);
     </script>
 </body>
 </html>
